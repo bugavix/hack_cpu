@@ -26,20 +26,20 @@ async def spi_ram(dut):
     ram_buffer = np.ubyte(0)
     while run_state:
         await FallingEdge(dut.csb_o) # RAM functioning
-        # print(f"Ram called at {get_sim_time(units = 'ns')}")
+        print(f"Ram called at {get_sim_time(units = 'ns')}")
         # instruction fetch
         ram_instruction = 0
         for i in range(8):
             await RisingEdge(dut.sclk_o)
             ram_instruction |= np.left_shift(dut.so_o.value.integer, 7 - i)
-        # print(f"At {get_sim_time('ns')}: instruction finished fetching: instruction {ram_instruction}")
+        print(f"At {get_sim_time('ns')}: instruction finished fetching: instruction {ram_instruction}")
 
         # address fetch
         ram_address = 0
         for i in range(16):
             await RisingEdge(dut.sclk_o)
             ram_address |= np.left_shift(dut.so_o.value.integer, 15 - i)
-        # print(f"At {get_sim_time('ns')}: address finished fetching: address {ram_address}")
+        print(f"At {get_sim_time('ns')}: address finished fetching: address {ram_address}")
         
         stop_ram = False
 
@@ -56,7 +56,7 @@ async def spi_ram(dut):
                         ram_buffer |= np.left_shift(dut.so_o.value.integer, 7 - i)
                 if not stop_ram:
                     ram[ram_address] = ram_buffer
-                    # print(f"At {get_sim_time('ns')}: Wrote byte {ram[ram_address]} at address {ram_address}")
+                    print(f"At {get_sim_time('ns')}: Wrote byte {ram[ram_address]} at address {ram_address}")
                 ram_address += 1
         elif ram_instruction == 3: # READ from RAM
             while not stop_ram:
@@ -67,8 +67,8 @@ async def spi_ram(dut):
                         break
                     else:
                         dut.si_i.value = 1 if ram[ram_address] & 2 ** (7 - i) else 0
-                # if not stop_ram:
-                    # print(f"At {get_sim_time('ns')}: outputed byte {ram[ram_address]} from address {ram_address}")
+                if not stop_ram:
+                    print(f"At {get_sim_time('ns')}: outputed byte {ram[ram_address]} from address {ram_address}")
                 ram_address += 1
 
 
