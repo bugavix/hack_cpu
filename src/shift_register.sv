@@ -24,6 +24,7 @@ module shift_register (
 	end : shift_reg_0
 
 	generate
+	begin
 		for(i = 1; i < 16; i += 1)
 		begin
 			always @(posedge clk, negedge resetb)
@@ -38,6 +39,7 @@ module shift_register (
 				end
 			end : shift_reg
 		end
+	end
 	endgenerate
 
 	assign out_o = shift_s;
