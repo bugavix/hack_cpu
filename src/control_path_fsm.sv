@@ -12,7 +12,7 @@
 
 `timescale 1ns/1ps
 
-typedef enum reg[1 : 0] {
+typedef enum {
 	FETCH_INSTRUCTION,
 	LATCH,
 	FETCH_MEMORY,
