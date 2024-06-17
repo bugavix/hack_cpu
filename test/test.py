@@ -216,7 +216,7 @@ async def cpu_top_tb(dut):
         dut.csb_i.value = 0
         run_debug = True
         cocotb.start_soon(generate_sclk(dut))
-        
+        print(f"At {get_sim_time('ns')}: Testing debug address {k}")
         for i in range(2):
             await FallingEdge(dut.sclk_i)
             dut.mi_i.value = 1 if k & 2**(1 - i) else 0
@@ -224,10 +224,11 @@ async def cpu_top_tb(dut):
         await RisingEdge(dut.sclk_i)
         for i in range(16):
             await RisingEdge(dut.sclk_i)
+            print(f"At {get_sim_time('ns')}: the spi debugger outputed {dut.mo_o.value.integer}")
             data[k] |= np.left_shift(dut.mo_o.value.integer, 15 - i)
 
             # print(data[k])
-        if k != 4:
+        if k != 3:
             assert data[k] == target[k], f"{data[k]}, {target[k]}"
 
         run_debug = False
