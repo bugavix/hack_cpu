@@ -14,8 +14,8 @@ module shift_register (
 	input wire in_i, en_i, clk, resetb,
 	output wire[15 : 0] out_o
 );
-	reg[15 : 0] shift_s;
 	genvar i;
+	reg[15 : 0] shift_s;
 
 	always @(posedge clk, negedge resetb)
 	begin : shift_reg_0
@@ -23,20 +23,15 @@ module shift_register (
 		else if(en_i)	shift_s[0] <= in_i;
 	end : shift_reg_0
 
-	generate
-		for(i = 1; i < 16; i += 1)
-			always @(posedge clk, negedge resetb)
-			begin : shift_reg
-				if(~resetb)
-				begin
-					shift_s[i] <= 1'b0;
-				end
-				else if(en_i)
-				begin
+	always @(posedge clk, negedge resetb)
+	begin
+		if(~resetb)	shift_s[15 : 1] <= 14'b0;
+		else if(en_i)
+			generate
+				for(i = 1; i < 16; i += 1)
 					shift_s[i] <= shift_s[i - 1];
-				end
-			end : shift_reg
-	endgenerate
+			endgenerate
+	end
 
 	assign out_o = shift_s;
 
