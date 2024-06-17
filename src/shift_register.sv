@@ -27,9 +27,10 @@ module shift_register (
 	begin
 		if(~resetb)	shift_s[15 : 1] <= 14'b0;
 		else if(en_i)
-			generate
-				for(i = 1; i < 16; i += 1)
+			generate 
+				for(i = 1; i < 16; i += 1) begin
 					shift_s[i] <= shift_s[i - 1];
+				end
 			endgenerate
 	end
 
