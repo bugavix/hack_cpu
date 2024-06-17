@@ -23,14 +23,16 @@ module shift_register (
 		else if(en_i)	shift_s[0] <= in_i;
 	end : shift_reg_0
 
-	generate : shift_reg_generate
+	generate
 		for(i = 1; i < 16; i += 1)
 			always @(posedge clk, negedge resetb)
 			begin : shift_reg
-				if(~resetb)	shift_s[i] <= 1'b0;
-				else if(en_i)	shift_s[i] <= shift_s[i - 1];
+				if(~resetb)
+					shift_s[i] <= 1'b0;
+				else if(en_i)
+					shift_s[i] <= shift_s[i - 1];
 			end : shift_reg
-	endgenerate : shift_reg_generate
+	endgenerate
 
 	assign out_o = shift_s;
 
