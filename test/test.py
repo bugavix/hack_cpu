@@ -84,7 +84,12 @@ run_debug = True
 
 async def generate_sclk(dut):
     global run_debug
+    first = True
     while run_debug:
+        if first:
+            dut.sclk_i.value = 1
+            await Timer(5, units = "ns")
+            first = False
         dut.sclk_i.value = 0
         await Timer(5, units = "ns")
         dut.sclk_i.value = 1
