@@ -1,41 +1,52 @@
 # Tiny Tapeout project information
 project:
-  title:        ""      # Project title
-  author:       ""      # Your name
+  title:        "HACK CPU"      # Project title
+  author:       "Dantong LUO, Nour MHANNA, Charbel SAAD"      # Your name
   discord:      ""      # Your discord username, for communication and automatically assigning you a Tapeout role (optional)
-  description:  ""      # One line description of what your project does
-  language:     "Verilog" # other examples include SystemVerilog, Amaranth, VHDL, etc
-  clock_hz:     0       # Clock frequency in Hz (or 0 if not applicable)
+  description:  "A 16-bit CPU based on the HACK architecture"      # One line description of what your project does
+  language:     "SystemVerilog" # other examples include SystemVerilog, Amaranth, VHDL, etc
+  clock_hz:     100000000       # Clock frequency in Hz (or 0 if not applicable)
 
   # How many tiles your design occupies? A single tile is about 167x108 uM.
   tiles: "1x1"          # Valid values: 1x1, 1x2, 2x2, 3x2, 4x2, 6x2 or 8x2
 
   # Your top module name must start with "tt_um_". Make it unique by including your github username:
-  top_module:  "tt_um_example"
+  top_module:  "tt_um_hack_cpu"
 
   # List your project's source files here.
   # Source files must be in ./src and you must list each source file separately, one per line.
   # Don't forget to also update `PROJECT_SOURCES` in test/Makefile.
   source_files:
-    - "project.v"
+    - "tt_um_hack_cpu.v"
+    - "alu.sv"
+    - "control_path_comb.sv"
+    - "control_path.sv"
+    - "data_path.sv"
+    - "shift_register.sv"
+    - "spi_master_fsm.sv"
+    - "spi_slave.sv"
+    - "control_path_fsm.sv"
+    - "cpu_top.sv"
+    - "spi_master_comb.sv"
+    - "spi_master.sv"
 
 # The pinout of your project. Leave unused pins blank. DO NOT delete or add any pins.
 pinout:
   # Inputs
-  ui[0]: ""
-  ui[1]: ""
-  ui[2]: ""
-  ui[3]: ""
-  ui[4]: ""
+  ui[0]: "serial input(MISO), connected to RAM"
+  ui[1]: "external halt signal (to use when debugging)"
+  ui[2]: "inverted chip select, connected to debugger"
+  ui[3]: "serial clock, connected to debugger"
+  ui[4]: "serial input(MOSI), connected to debugger"
   ui[5]: ""
   ui[6]: ""
   ui[7]: ""
 
   # Outputs
-  uo[0]: ""
-  uo[1]: ""
-  uo[2]: ""
-  uo[3]: ""
+  uo[0]: "serial output(MOSI), connected to RAM"
+  uo[1]: "serial clock, connected to RAM"
+  uo[2]: "inverted chip select, connected to RAM"
+  uo[3]: "serial output(MISO), connected to debugger"
   uo[4]: ""
   uo[5]: ""
   uo[6]: ""

@@ -23,8 +23,24 @@ module tb ();
   wire [7:0] uio_out;
   wire [7:0] uio_oe;
 
+  // Create and assign the cpu signals:
+
+  wire resetb, si_i, extHalt_i, csb_i, sclk_i, mi_i, so_o, sclk_o, csb_o, mo_o;
+
+  assign rst_n = resetb;
+  assign ui_in[0] = si_i;
+  assign ui_in[1] = extHalt_i;
+  assign ui_in[2] = csb_i;
+  assign ui_in[3] = sclk_i;
+  assign ui_in[4] = mi_i;
+  assign ui_in[7 : 5] = 3'b0;
+  assign so_o = uo_out[0];
+  assign sclk_o = uo_out[1];
+  assign csb_o = uo_out[2];
+  assign mo_o = uo_out[3];
+
   // Replace tt_um_example with your module name:
-  tt_um_example user_project (
+  tt_um_hack_cpu hack_cpu (
 
       // Include power ports for the Gate Level test:
 `ifdef GL_TEST
