@@ -233,7 +233,7 @@ async def cpu_top_tb(dut):
 
         run_debug = False
         dut.csb_i.value = 1 # Ending the debug transfer
-        await Timer(13, units = "ns")
+        await Timer(40, units = "ns")
 
     await Timer(1000, units = "ns")
     
