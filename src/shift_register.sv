@@ -14,15 +14,14 @@ module shift_register (
 	input wire in_i, en_i, clk, resetb,
 	output wire[15 : 0] out_o
 );
-	genvar i;
 	reg[15 : 0] shift_s;
 
 	always @(posedge clk, negedge resetb)
-	begin : shift_reg_0
+	begin
 		if(~resetb)	shift_s <= 16'b0;
-		else if(en_i)	shift_s <= {shift_s[14 : 0], in_i };
-	end : shift_reg_0
-	
+		else if(en_i)	shift_s <= {shift_s[14 : 0], in_i};
+	end
+
 	assign out_o = shift_s;
 
 endmodule : shift_register
