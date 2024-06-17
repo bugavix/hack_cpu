@@ -33,4 +33,4 @@ module tt_um_hack_cpu (
 		.mo_o(uo_out[3])
 	);
 
-endmodule
+endmodule : tt_um_hack_cpu
