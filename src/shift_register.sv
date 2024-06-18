@@ -24,7 +24,7 @@ module shift_register (
 	end
 
 	generate
-		for(i = 1; i < 16; i = i + 1)
+		for(i = 1; i < 16; i += 1)
 			always @(posedge clk, negedge resetb)
 			begin
 				if(~resetb)	shift_s[i] <= 1'b0;

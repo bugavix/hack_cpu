@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------
-// Module Name    : data_path
+// Module Name    : main
 // Creator        : Charbel SAAD
 // Creation Date  : 12/04/2024
 //
@@ -28,56 +28,73 @@
 
 `timescale 1ns/1ps
 
-module data_path (
+module main (
 	input wire[15 : 0] inM_i, instruction_i,
 	input wire resetb, clk,
-	input wire selA_i, enA_i, selALU_i, enD_i, enPC_i, loadPC_i, na_i, za_i, nb_i, zb_i, f_i, no_i, halt_i,
-	output wire[15 : 0] outM_o, addressM_o, pc_o, regD_o,
-	output wire zr_o, zn_o
+	input wire enLatch_i, halt_i,
+	output wire[15 : 0] outM_o, addressM_o, pc_o, regD_o
 );
 	
 	wire[15 : 0] muxA_s, muxALU_s, alu_s;
 	reg[15 : 0] regD_s, regA_s, regPC_s;
+	wire selA_s, enA_s, selALU_s, enD_s, loadPC_s, na_s, za_s, nb_s, zb_s, f_s, no_s, zr_s, zn_s;
 
 	alu alu_instance (
 		.a_i(regD_s),
 		.b_i(muxALU_s),
-		.na_i(na_i),
-		.za_i(za_i),
-		.nb_i(nb_i),
-		.zb_i(zb_i),
-		.f_i(f_i),
-		.no_i(no_i),
+		.na_i(na_s),
+		.za_i(za_s),
+		.nb_i(nb_s),
+		.zb_i(zb_s),
+		.f_i(f_s),
+		.no_i(no_s),
 		.out_o(alu_s),
-		.zr_o(zr_o),
-		.zn_o(zn_o)
+		.zr_o(zr_s),
+		.zn_o(zn_s)
+	);
+
+	controller controller_instance (
+		.instruction_i(instruction_i),
+		.zn_i(zn_s),
+		.zr_i(zr_s),
+		.enA_o(enA_s),
+		.enD_o(enD_s),
+		.selA_o(selA_s),
+		.selALU_o(selALU_s),
+		.na_o(na_s),
+		.za_o(za_s),
+		.nb_o(nb_s),
+		.zb_o(zb_s),
+		.f_o(f_s),
+		.no_o(no_s),
+		.loadPC_o(loadPC_s)
 	);
 
 	always @(posedge clk, negedge resetb)
 	begin
-		if(~resetb)		regD_s <= 16'b0;
-		else if (enD_i)		regD_s <= alu_s;
+		if(~resetb)			regD_s <= 16'b0;
+		else if (enD_s & enLatch_i)	regD_s <= alu_s;
 	end
 
 	always @(posedge clk, negedge resetb)
 	begin
-		if(~resetb)		regA_s <= 16'b0;
-		else if(enA_i)		regA_s <= muxA_s;
+		if(~resetb)			regA_s <= 16'b0;
+		else if(enA_s & enLatch_i)	regA_s <= muxA_s;
 	end
 
 	always @(posedge clk, negedge resetb)
 	begin
 		if(~resetb)		regPC_s <= 16'b0;
-		else if(enPC_i & ~halt_i)
-			if(loadPC_i)	regPC_s <= regA_s;
+		else if(enLatch_i & ~halt_i)
+			if(loadPC_s)	regPC_s <= regA_s;
 			else		regPC_s <= regPC_s + 16'b10;	
 	end
 
-	assign muxA_s = selA_i ? instruction_i : alu_s;
-	assign muxALU_s = selALU_i ? inM_i : regA_s;
+	assign muxA_s = selA_s ? instruction_i : alu_s;
+	assign muxALU_s = selALU_s ? inM_i : regA_s;
 	assign outM_o = alu_s;
 	assign addressM_o = regA_s;
 	assign pc_o = regPC_s;
 	assign regD_o = regD_s;
 
-endmodule : data_path
+endmodule : main

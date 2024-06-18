@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------
-// Module Name    : control_path_fsm
+// Module Name    : cpu_fsm
 // Creator        : Charbel SAAD
 // Creation Date  : 22/05/2024
 //
@@ -19,7 +19,7 @@ typedef enum reg[1 : 0] {
 	SAVE_MEMORY
 } state_t;
 
-module control_path_fsm (
+module cpu_fsm (
 	input wire clk, resetb, cab_i, readMem_i, latchMem_i, halt_i,
 	output logic enLatch_o, spiStart_o, rwb_o, selSPIAddress_o, selSPIDest_o,
 	output wire[1 : 0] state_o
@@ -90,4 +90,4 @@ module control_path_fsm (
 
 	assign state_o = state_s;
 
-endmodule : control_path_fsm
+endmodule : cpu_fsm
