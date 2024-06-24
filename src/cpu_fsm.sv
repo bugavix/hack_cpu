@@ -31,6 +31,7 @@ module cpu_fsm (
 	begin
 		if(~resetb)						state_s <= FETCH_INSTRUCTION;
 		else if(~halt_i)
+
 			case(state_s)
 				FETCH_INSTRUCTION: 
 					if(cab_i && readMem_i)		state_s <= FETCH_MEMORY;

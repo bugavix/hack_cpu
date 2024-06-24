@@ -16,8 +16,6 @@ module controller (
 	output wire enA_o, enD_o, selA_o, selALU_o, na_o, za_o, nb_o, zb_o, f_o, no_o, loadPC_o
 );
 
-	wire tmp_s;
-	
 	assign selA_o = ~instruction_i[15];
 	assign selALU_o = instruction_i[12];
 	assign za_o = instruction_i[11];
@@ -28,7 +26,6 @@ module controller (
 	assign no_o = instruction_i[6];
 	assign enA_o = instruction_i[5] | ~instruction_i[15];
 	assign enD_o = instruction_i[4] & instruction_i[15];
-	assign tmp_s = (instruction_i[2] & instruction_i[1]) | ~(zn_i | zr_i | (instruction_i[2] & instruction_i[1]));
-	assign loadPC_o = instruction_i[15] & ((zn_i & instruction_i[2]) | (zr_i & instruction_i[1]) | (instruction_i[0] & tmp_s));
+	assign loadPC_o = instruction_i[15] & ((zn_i & instruction_i[2]) | (zr_i & instruction_i[1]) | (instruction_i[0] & ~zn_i & ~zr_i));
 
 endmodule : controller
