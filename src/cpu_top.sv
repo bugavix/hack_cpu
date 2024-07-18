@@ -35,7 +35,7 @@ module cpu_top (
 	
 	wire[15 : 0] muxA_s, muxALU_s, inM_s, instruction_s, outM_s, spiAddress_s;
 	reg[15 : 0] regD_s, regA_s, pc_s;
-	wire[1 : 0] state_s;
+	wire[3 : 0] state_s;
 	wire selA_s, enA_s, selALU_s, enD_s, enPC_s, loadPC_s, na_s, za_s, nb_s, zb_s, f_s, no_s, zr_s, zn_s, spiHalt_s, spiStart_s, rwb_s, selSPIAddress_s, selSPIDest_s;
 
 	alu alu_instance (
@@ -122,7 +122,7 @@ module cpu_top (
 	always_ff @(posedge clk, negedge resetb)
 	begin
 		if(~resetb)		pc_s <= 16'b0;
-		else if(enPC_s)
+		else if(enPC_s & ~halt_i)
 			if(loadPC_s)	pc_s <= regA_s;
 			else		pc_s <= pc_s + 16'b10;	
 	end

@@ -21,7 +21,7 @@
 
 module spi_debug (
 	input wire[15 : 0] regD_i, regA_i, pc_i,
-	input wire[1 : 0] state_i,
+	input wire[3 : 0] state_i,
 	input wire resetb, sclk_i, csb_i, si_i,
 	output wire so_o
 );
@@ -57,7 +57,7 @@ module spi_debug (
 			2'b00:	out_s = regD_i;
 			2'b01: 	out_s = regA_i;
 			2'b10:	out_s = pc_i;
-			2'b11:	out_s = {14'b0, state_i};
+			2'b11:	out_s = {12'b0, state_i};
 		endcase
 	end
 
