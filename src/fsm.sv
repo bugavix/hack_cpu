@@ -117,6 +117,9 @@ module fsm (
 					3'b110: next_state_s = LATCH_PCA;
 					3'b111: next_state_s = LATCH_PCAD;
 				endcase
+
+			default:
+				next_state_s = FETCH_INSTRUCTION;
 		endcase
 	end
 
@@ -253,6 +256,18 @@ module fsm (
 				enD_o = 1'b0;
 				loadPC_o = 1'b0;
 				enPC_o = 1'b0;
+			end
+
+			default:
+			begin
+				spiStart_o = 1'b0; // don't care
+				rwb_o = 1'b0; // don't care
+				selSPIAddress_o = 1'b0; // don't care
+				selSPIDest_o = 1'b0; // don't care
+				enA_o = 1'b0; // don't care
+				enD_o = 1'b0; // don't care
+				loadPC_o = 1'b0; // don't care
+				enPC_o = 1'b0; // don't care
 			end
 		endcase
 	end
