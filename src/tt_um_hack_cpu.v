@@ -22,15 +22,15 @@ module tt_um_hack_cpu (
 	cpu_top cpu (
 		.clk(clk),
 		.resetb(rst_n),
-		.si_i(ui_in[0]),
-		.extHalt_i(ui_in[1]),
-		.csb_i(ui_in[2]),
-		.sclk_i(ui_in[3]),
-		.mi_i(ui_in[4]),
-		.so_o(uo_out[0]),
-		.sclk_o(uo_out[1]),
-		.csb_o(uo_out[2]),
-		.mo_o(uo_out[3])
+		.mem_in_i(ui_in[0]),
+		.halt_i(ui_in[1]),
+		.debug_csb_i(ui_in[2]),
+		.debug_sclk_i(ui_in[3]),
+		.debug_in_i(ui_in[4]),
+		.mem_out_o(uo_out[0]),
+		.mem_sclk_o(uo_out[1]),
+		.mem_csb_o(uo_out[2]),
+		.debug_out_o(uo_out[3])
 	);
 
 endmodule : tt_um_hack_cpu

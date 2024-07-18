@@ -17,7 +17,7 @@ module shift_register (
 	reg[15 : 0] shift_s;
 	genvar i;
 
-	always @(posedge clk, negedge resetb)
+	always_ff @(posedge clk, negedge resetb)
 	begin
 		if(~resetb)	shift_s[0] <= 1'b0;
 		else if(en_i)	shift_s[0] <= in_i;
@@ -25,7 +25,7 @@ module shift_register (
 
 	generate
 		for(i = 1; i < 16; i = i + 1)
-			always @(posedge clk, negedge resetb)
+			always_ff @(posedge clk, negedge resetb)
 			begin
 				if(~resetb)	shift_s[i] <= 1'b0;
 				else if(en_i)	shift_s[i] <= shift_s[i - 1];

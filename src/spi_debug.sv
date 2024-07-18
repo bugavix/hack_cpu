@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------
-// Module Name    : spi_slave
+// Module Name    : spi_debug
 // Creator        : Charbel SAAD
 // Creation Date  : 06/06/2024
 //
@@ -7,7 +7,7 @@
 // The spi_module that connects with the debugger. The serial clock and the
 // chip select are both inputs and driven by the debugging chip. The debugging
 // device doesn't output to the cpu but only read the serial output.
-// The spi_slave module only works with spi mode 3.
+// The spi_debug module only works with spi mode 3.
 // 
 // Address:
 // 0 : regD
@@ -19,7 +19,7 @@
 
 `timescale 1ns/1ps
 
-module spi_slave (
+module spi_debug (
 	input wire[15 : 0] regD_i, regA_i, pc_i,
 	input wire[1 : 0] state_i,
 	input wire resetb, sclk_i, csb_i, si_i,
@@ -31,7 +31,7 @@ module spi_slave (
 	reg[1 : 0] in_s;
 
 	// input shift register
-	always @(posedge sclk_i, negedge resetb)
+	always_ff @(posedge sclk_i, negedge resetb)
 	begin
 		if(~resetb)	in_s <= 2'b0;
 		else if(~csb_i & counter_s[4])
@@ -41,7 +41,7 @@ module spi_slave (
 		end
 	end
 	
-	always @(negedge sclk_i, negedge resetb)
+	always_ff @(negedge sclk_i, negedge resetb)
 	begin
 		if(~resetb)	counter_s <= 5'b0;
 		else if(~csb_i)
@@ -51,7 +51,7 @@ module spi_slave (
 				counter_s <= counter_s - 5'b1;
 	end
 
-	always @(*)
+	always_comb
 	begin
 		case(in_s)
 			2'b00:	out_s = regD_i;
@@ -63,4 +63,4 @@ module spi_slave (
 
 	assign so_o = out_s[counter_s[3 : 0]];
 	
-endmodule : spi_slave
+endmodule : spi_debug

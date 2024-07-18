@@ -19,15 +19,11 @@ project:
   source_files:
     - "tt_um_hack_cpu.v"
     - "alu.sv"
-    - "controller.sv"
-    - "main.sv"
+    - "fsm.sv"
     - "shift_register.sv"
-    - "spi_master_fsm.sv"
-    - "spi_slave.sv"
-    - "cpu_fsm.sv"
+    - "spi_mem.sv"
+    - "spi_debug.sv"
     - "cpu_top.sv"
-    - "spi_master_comb.sv"
-    - "spi_master.sv"
 
 # The pinout of your project. Leave unused pins blank. DO NOT delete or add any pins.
 pinout:

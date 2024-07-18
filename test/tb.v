@@ -25,19 +25,19 @@ module tb ();
 
   // Create and assign the cpu signals:
 
-  wire resetb, si_i, extHalt_i, csb_i, sclk_i, mi_i, so_o, sclk_o, csb_o, mo_o;
+  wire resetb, mem_in_i, halt_i, debug_csb_i, debug_sclk_i, debug_in_i, mem_out_o, mem_sclk_o, mem_csb_o, debug_out_o;
 
   assign rst_n = resetb;
-  assign ui_in[0] = si_i;
-  assign ui_in[1] = extHalt_i;
-  assign ui_in[2] = csb_i;
-  assign ui_in[3] = sclk_i;
-  assign ui_in[4] = mi_i;
+  assign ui_in[0] = mem_in_i;
+  assign ui_in[1] = halt_i;
+  assign ui_in[2] = debug_csb_i;
+  assign ui_in[3] = debug_sclk_i;
+  assign ui_in[4] = debug_in_i;
   assign ui_in[7 : 5] = 3'b0;
-  assign so_o = uo_out[0];
-  assign sclk_o = uo_out[1];
-  assign csb_o = uo_out[2];
-  assign mo_o = uo_out[3];
+  assign mem_out_o = uo_out[0];
+  assign mem_sclk_o = uo_out[1];
+  assign mem_csb_o = uo_out[2];
+  assign debug_out_o = uo_out[3];
 
   // Replace tt_um_example with your module name:
   tt_um_hack_cpu hack_cpu (
