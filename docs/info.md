@@ -13,7 +13,8 @@ The device we developed is a 16-bit CPU base on the HACK architecture, the below
 
 ![The cpu_top module content](graphs-new_cpu_top.drawio.svg)
 
-As we can see, it contains thre main registerr, an ALU and two SPI modules. Each registre has a unique function.
+As we can see, it contains thre main register, an ALU and two SPI modules. Each register has a unique function.
+
 - D register stands as an accumulator.
 - A register plays two roles. It first serves as an address register. It is also a direct access register.
 - PC is the program counter.
@@ -27,6 +28,7 @@ Since we don't have enough space on the chip, we can't include the memory. Moreo
 ![The finite state machine](graphs-cpu_fsm_horz.drawio.svg)
 
 For the serial comunication protocol, we chose SPI since it is one of the simplest to implement. We have to take into account 4 signals:
+
 - MOSI: The signal containing the data transfered from the CPU to the memory.
 - MISO: The signal transfering the data from the memory to the CPU.
 - CSB: The signal that tells the memory that the CPU needs it.
@@ -45,6 +47,7 @@ The final module also processes SPI signals but is used for debugging purposes. 
 ![The debuging module](spi_debug.PNG)
 
 To comunicate, the debugging device send two bits of data, and depending to these bits, the CPU will output a specific value:
+
 - 0 : register D
 - 1 : register A
 - 2 : Program Counter
