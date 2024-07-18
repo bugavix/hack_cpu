@@ -122,9 +122,9 @@ async def test(dut):
     dut.resetb.value = 1
     # TEST START
 
-    read_code("OBJ/a.out")
+    read_code("a.out")
     await Timer(200000, units = 'ns')
-    save_ram("OBJ/ram.bin")
+    save_ram("ram.bin")
 
     # TEST END
     run_state = False
