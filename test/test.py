@@ -84,7 +84,12 @@ run_debug = True
 
 async def generate_sclk(dut):
     global run_debug
+    first = True
     while run_debug:
+        if first:
+            dut.debug_sclk_i.value = 1
+            await Timer(5, units = "ns")
+            first = False
         dut.debug_sclk_i.value = 0
         await Timer(5, units = "ns")
         dut.debug_sclk_i.value = 1
@@ -226,9 +231,7 @@ async def cpu_top_tb(dut):
             await RisingEdge(dut.debug_sclk_i)
             data[k] |= np.left_shift(dut.debug_out_o.value.integer, 15 - i)
 
-        if k == 4:
-            print(data[k])
-        else:
+        if k != 3 :
             assert data[k] == target[k], f"{data[k]}, {target[k]}"
 
         run_debug = False
