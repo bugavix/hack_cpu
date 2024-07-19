@@ -155,6 +155,6 @@ module spi_mem (
 	assign out_s = {7'b1, rwb_i, address_i, data_i[7 : 0], data_i[15 : 8]};
 	assign so_o = out_s[count_s];
 	assign sclk_o = (enCount_s) ? clk : 1'b1;
-	assign halt_o = halt_s | (~state_s[0] & ~state_s[1] & ~state_s[2] & start_i);
+	assign halt_o = halt_s | ((state_s == IDLE) & start_i);
 
 endmodule : spi_mem
