@@ -7,6 +7,10 @@ You can also include images in this folder and reference them in the markdown. E
 512 kb in size, and the combined size of all images must be less than 1 MB.
 -->
 
+## License
+
+This work is licensed under [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International](https://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1). It incorporates code and concepts from the nand2tetris project, and from the book “The Elements of Computing Systems” by Noam Nisan and Shimon Schocken. We are grateful for their pioneering work and contributions to the field of computer science education. For more information, please visit the [nand2tetris website](https://www.nand2tetris.org/).
+
 ## How it works
 
 The device we developed is a 16-bit CPU based on the HACK architecture. The figure below shows the detailed architecture.

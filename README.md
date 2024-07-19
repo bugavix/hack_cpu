@@ -44,6 +44,10 @@ The GitHub action will automatically build the ASIC files using [OpenLane](https
 
 This project involves an attempt to design a CPU based on the HACK architecture introduced by Noam NISAN and Schimon SCHOKEN in their book *The Elements of Computing Systems*. The CPU itself consists of a 16-bit data bus, an SPI module for communication with memory, and another SPI module for sending debugging data. The main goal of the project is to test the capabilities and limitations of open-source tools used for microelectronic circuit design. Specifically, we will first explore the OpenLane process to transform HDL files into synthesizable output, followed by the TinyTapeout initiative for chip fabrication.
 
+## License
+
+This work is licensed under [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International](https://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1). It incorporates code and concepts from the nand2tetris project, and from the book “The Elements of Computing Systems” by Noam Nisan and Shimon Schocken. We are grateful for their pioneering work and contributions to the field of computer science education. For more information, please visit the [nand2tetris website](https://www.nand2tetris.org/).
+
 ## Authors
 
 | Dantong LUO | Nour MHANNA | Charbel SAAD |
@@ -94,14 +98,11 @@ Due to spatial constraints, we cannot integrate memory inside the chip. Similarl
 
 ## Testing
 
-We've implemented two different test benches to evaluate the CPU. 
-- The first one executes a function that finds the fourth element of the fibonnaci sequence. It then tests the debugging module by sending and receiving the corresponding data.
-- The second test bench can execute any code provided to the CPU in binary. These instructions should be assembled and disposed in a file named `a.out` (more on that in the additional resources). The CPU then executes 20000 clock cycle before writing the RAM content in a file named `ram.bin`. The tester can then evaluate the variables' values. In order to use this test insteadf of the other one, just switch the names.
+Testing the CPU is straightforward: the test bench executes a function that finds the fourth element of the Fibonacci sequence. It then tests the debugging module by sending and receiving the corresponding data. This Fibonacci function contains almost every type of instruction and is thus very efficient for testing the device.
 
 ## Additional Resources
 
-For more information about the internal modules, we invite you to consult the documentation. You can also explore our local [Gitlab repository](https://gitlab.emse.fr/charbel.saad/16-bit-cpu.git), which contains the complete versioning track of the code development. It also contains a report as well as a slide presentation, both containing precisions about the conception phase. Moreover, this repositrory provides the code for an assembler(`SRC/misc/hack.cpp`). After compiling, it can be handy when using the second test.
+For more information about the internal modules, we invite you to consult the documentation as well as the [nand2tetris project](https://www.nand2tetris.org/) that dives further into details about the CPU and its use.
 
-```
-hack <assembly_file_path> [<binary_file_path>]
-```
+## License
+
