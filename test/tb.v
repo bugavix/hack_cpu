@@ -32,7 +32,7 @@ module tb ();
   assign ui_in[0] = halt_i;
   assign uio_in[4] = debug_csb_i;
   assign uio_in[7] = debug_sclk_i;
-  assign uio_in[4] = debug_in_i;
+  assign uio_in[5] = debug_in_i;
   assign ui_in[7 : 1] = 7'b0;
   assign mem_out_o = uio_out[1];
   assign mem_sclk_o = uio_out[3];
