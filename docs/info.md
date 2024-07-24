@@ -55,9 +55,9 @@ To communicate, the debugging device sends two bits of data, and depending on th
 
 ## How to test
 
-The chip needs to be connected to an SPI RAM. We focused the design around the 23XX512, an SPI RAM developed by Microchip Inc. Just add the binary code to the RAM and provide an adequate 100 MHz clock signal. For debugging, a microcontroller with an SPI interface can do the job.
+The chip needs to be connected to an SPI RAM. We focused the design around the 23XX512, an SPI RAM developed by Microchip Inc. Just add the binary code to the RAM and provide an adequate 12.5 MHz clock signal. For debugging, a microcontroller with an SPI interface can do the job.
 
-Since the chip is going to be soldered to a debug board with an RP2040 on it, we can use the code provided by [MichaelBell](https://github.com/MichaelBell) to emulate the RAM ([Github repsitory](https://github.com/MichaelBell/spi-ram-emu.git)). However, this solution results in a clock frequency drop, requiring one smaller than 12.5 MHz. The RP2040 can also be used as a debugger.
+Since the chip is going to be soldered to a debug board with an RP2040 on it, we can use the code provided by [MichaelBell](https://github.com/MichaelBell) to emulate the RAM ([Github repsitory](https://github.com/MichaelBell/spi-ram-emu.git)). The RP2040 can also be used as a debugger.
 
 ## External hardware
 
