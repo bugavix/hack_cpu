@@ -15,22 +15,22 @@ module tt_um_hack_cpu (
     input  wire       rst_n     // reset_n - low to reset
 );
 
-	assign uo_out[7 : 4] = 4'b0;
-	assign uio_oe = 8'hFF;
-	assign uio_out = 8'b0;
+	assign uo_out = 8'b0;
+	assign uio_oe = 8'h4B;
+	assign {uio_out[7], uio_out[5 : 4], uio_out[2]} = 4'b0;
 
 	cpu_top cpu (
 		.clk(clk),
 		.resetb(rst_n),
-		.mem_in_i(ui_in[0]),
-		.halt_i(ui_in[1]),
-		.debug_csb_i(ui_in[2]),
-		.debug_sclk_i(ui_in[3]),
-		.debug_in_i(ui_in[4]),
-		.mem_out_o(uo_out[0]),
-		.mem_sclk_o(uo_out[1]),
-		.mem_csb_o(uo_out[2]),
-		.debug_out_o(uo_out[3])
+		.mem_in_i(uio_in[2]),
+		.halt_i(ui_in[0]),
+		.debug_csb_i(uio_in[4]),
+		.debug_sclk_i(uio_in[7]),
+		.debug_in_i(uio_in[5]),
+		.mem_out_o(uio_out[1]),
+		.mem_sclk_o(uio_out[3]),
+		.mem_csb_o(uio_out[0]),
+		.debug_out_o(uio_out[6])
 	);
 
 endmodule : tt_um_hack_cpu

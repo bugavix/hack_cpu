@@ -5,7 +5,7 @@ project:
   discord:      ""      # Your discord username, for communication and automatically assigning you a Tapeout role (optional)
   description:  "A 16-bit CPU based on the HACK architecture"      # One line description of what your project does
   language:     "SystemVerilog" # other examples include SystemVerilog, Amaranth, VHDL, etc
-  clock_hz:     100000000       # Clock frequency in Hz (or 0 if not applicable)
+  clock_hz:     12500000       # Clock frequency in Hz (or 0 if not applicable)
 
   # How many tiles your design occupies? A single tile is about 167x108 uM.
   tiles: "1x1"          # Valid values: 1x1, 1x2, 2x2, 3x2, 4x2, 6x2 or 8x2
@@ -28,34 +28,34 @@ project:
 # The pinout of your project. Leave unused pins blank. DO NOT delete or add any pins.
 pinout:
   # Inputs
-  ui[0]: "serial input(MISO), connected to RAM"
-  ui[1]: "external halt signal (to use when debugging)"
-  ui[2]: "inverted chip select, connected to debugger"
-  ui[3]: "serial clock, connected to debugger"
-  ui[4]: "serial input(MOSI), connected to debugger"
+  ui[0]: "external halt signal (to use when debugging)"
+  ui[1]: ""
+  ui[2]: ""
+  ui[3]: ""
+  ui[4]: ""
   ui[5]: ""
   ui[6]: ""
   ui[7]: ""
 
   # Outputs
-  uo[0]: "serial output(MOSI), connected to RAM"
-  uo[1]: "serial clock, connected to RAM"
-  uo[2]: "inverted chip select, connected to RAM"
-  uo[3]: "serial output(MISO), connected to debugger"
+  uo[0]: ""
+  uo[1]: ""
+  uo[2]: ""
+  uo[3]: ""
   uo[4]: ""
   uo[5]: ""
   uo[6]: ""
   uo[7]: ""
 
   # Bidirectional pins
-  uio[0]: ""
-  uio[1]: ""
-  uio[2]: ""
-  uio[3]: ""
-  uio[4]: ""
-  uio[5]: ""
-  uio[6]: ""
-  uio[7]: ""
+  uio[0]: "GPIO21 - RAM CS"
+  uio[1]: "GPIO22 - RAM MOSI"
+  uio[2]: "GPIO23 - RAM MISO"
+  uio[3]: "GPIO24 - RAM SCK"
+  uio[4]: "DEBUG CS"
+  uio[5]: "DEBUG MOSI"
+  uio[6]: "DEBUG MISO"
+  uio[7]: "DEBUG SCK"
 
 # Do not change!
 yaml_version: 6

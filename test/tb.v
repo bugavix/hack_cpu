@@ -28,16 +28,16 @@ module tb ();
   wire resetb, mem_in_i, halt_i, debug_csb_i, debug_sclk_i, debug_in_i, mem_out_o, mem_sclk_o, mem_csb_o, debug_out_o;
 
   assign rst_n = resetb;
-  assign ui_in[0] = mem_in_i;
-  assign ui_in[1] = halt_i;
-  assign ui_in[2] = debug_csb_i;
-  assign ui_in[3] = debug_sclk_i;
-  assign ui_in[4] = debug_in_i;
-  assign ui_in[7 : 5] = 3'b0;
-  assign mem_out_o = uo_out[0];
-  assign mem_sclk_o = uo_out[1];
-  assign mem_csb_o = uo_out[2];
-  assign debug_out_o = uo_out[3];
+  assign uio_in[2] = mem_in_i;
+  assign ui_in[0] = halt_i;
+  assign uio_in[4] = debug_csb_i;
+  assign uio_in[7] = debug_sclk_i;
+  assign uio_in[4] = debug_in_i;
+  assign ui_in[7 : 1] = 7'b0;
+  assign mem_out_o = uio_out[1];
+  assign mem_sclk_o = uio_out[3];
+  assign mem_csb_o = uio_out[0];
+  assign debug_out_o = uio_out[6];
 
   // Replace tt_um_example with your module name:
   tt_um_hack_cpu hack_cpu (
