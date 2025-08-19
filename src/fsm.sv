@@ -4,8 +4,8 @@
 // Creation Date  : 10/07/2024
 //
 // Description:
-// This module takes the place of the old cpu_fsm and conrtroller module.
-// It manages the all the control signals by its own.
+// This module manages all the control signals.
+// For more details on each signal description, check src/cpu_top.sv
 //
 //------------------------------------------------------------------------
 

@@ -5,22 +5,23 @@
 //
 // Description:
 // This is where the data flows to get processed.
-// Control signals functionning:
+//
+// Control signals:
 // selA		: mux select for register A input (0: ALU, 1: instruction)
 // enA		: register A input enabled
 // selALU	: mux select for ALU second operand (0: regA, 1: memory)
 // enD		: register D input enabled
 // enPC		: when high: increment PC if loadPC is low else load a
-// 		  value.
+// 		      value.
 // loadPC	: load PC from register A
-// na		: bit inverse ALU operand 1
-// za		: zero ALU operand 1
-// nb		: bit inverse ALU operand 2
-// zb		: zero ALU operand 2
-// f		: function select fro ALU (0: &, 1: +)
-// no		: bit inverse ALU result
+// na		  : bit inverse ALU operand 1
+// za		  : zero ALU operand 1
+// nb		  : bit inverse ALU operand 2
+// zb		  : zero ALU operand 2
+// f		  : function select fro ALU (0: &, 1: +)
+// no		  : bit inverse ALU result
 //
-// Flag signals functionning:
+// Flag signals:
 // zr		: ALU result is null (outM == 0)
 // zn		: ALU result is negative (outM[15] == 1)
 //

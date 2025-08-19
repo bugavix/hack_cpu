@@ -4,8 +4,8 @@
 // Creation Date  : 28/05/2024
 //
 // Description:
-// The spi_mem module combining the logic module (spi_mem_comb) and the
-// fsm module (spi_mem_fsm)
+// The SPI module responsible of communicating between the CPU and the SPI
+// RAM. 
 //
 //------------------------------------------------------------------------
 

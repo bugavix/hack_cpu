@@ -4,7 +4,7 @@
 // Creation Date  : 06/06/2024
 //
 // Description:
-// The spi_module that connects with the debugger. The serial clock and the
+// The spi module that connects with the debugger. The serial clock and the
 // chip select are both inputs and driven by the debugging chip. The debugging
 // device doesn't output to the cpu but only read the serial output.
 // The spi_debug module only works with spi mode 3.
